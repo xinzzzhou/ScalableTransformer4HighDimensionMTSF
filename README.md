@@ -1,5 +1,5 @@
-# ScalableTransformer4HighDimensionMTSF
-This project is relevant to CIKM 2024 submission 1384. We provide the open source code and datasets.
+# Scalable Transformer for High Dimensional Multivariate Time Series Forecasting
+This paper was accepted by CIKM 2024. We provide the open-source code here.
 ## Running pipeline
 ### Relation sparsity
 Run ./datasets/crime/top-k-train corr-compute.py to get the correlation, modeling with the accelerated computation - DeepGraph. 
