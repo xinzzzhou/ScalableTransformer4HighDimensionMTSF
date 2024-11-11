@@ -1,6 +1,6 @@
 # Scalable Transformer for High Dimensional Multivariate Time Series Forecasting
 This paper was accepted by CIKM 2024. We provide the open-source code here.
-This is the official repository for "Scalable Transformer for High Dimensional Multivariate Time Series Forecasting" ***(Accepted by CIKM-24)*** <br>
+This is the official repository for "Scalable Transformer for High Dimensional Multivariate Time Series Forecasting" ***(Accepted by CIKM-24)*** [[Paper]](https://dl.acm.org/doi/10.1145/3627673.3679757) <br>
 
 🌟 If you find this work helpful, please consider to star this repository and cite our research:
 ```
