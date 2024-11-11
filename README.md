@@ -23,7 +23,7 @@ This is the official repository for "Scalable Transformer for High Dimensional M
 ```
 
 ## Datasets
-Please access the well pre-processed Crime-Chicago and Wiki-People datasets from [[Google Drive]](https://drive.google.com/drive/folders/1O-LcxA3TGTFMpCAybA6OmRXEfjdA8q8W?usp=drive_link), then place the downloaded contents under the corresponding folders of `/dataset`
+Please access the well-pre-processed Crime-Chicago and Wiki-People datasets from [[Google Drive]](https://drive.google.com/drive/folders/1O-LcxA3TGTFMpCAybA6OmRXEfjdA8q8W?usp=drive_link), then place the downloaded contents under the corresponding folders of `/dataset`
 
 ## Quick Demo
 1. Clone this repository
@@ -41,7 +41,7 @@ pip install -r requirements.txt
 4. Train and test the model. We provide two main.py files for demonstration purpose under the root folder. For example, you can train and test Crime-Chicago dataset by:
    
 ***Relation sparsity.***
-Run datasets/crime/top-k-train corr-compute.py to get the correlation, modeling with the accelerated computation - DeepGraph. 
+Run datasets/top-k-train corr-compute.py to get the correlation, modeling with the accelerated computation - DeepGraph. 
 ```
 python datasets/top-k-train/corr-compute.py
 ```
