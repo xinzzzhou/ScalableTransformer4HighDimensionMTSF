@@ -21,29 +21,31 @@ if __name__ == '__main__':
     # basic config
     parser.add_argument('--task_name', type=str, default='long_term_forecast', help='task name')
     parser.add_argument('--is_training', type=int, default=1, help='status')
-    parser.add_argument('--model_id', type=str, default='test', help='model id')
+    parser.add_argument('--model_id', type=str, default='main', help='model id')
     parser.add_argument('--model', type=str, default='STHD', help='model name')
 
     # data loader
-    parser.add_argument('--data', type=str, default='crime-reindex', help='dataset type')
-    parser.add_argument('--root_path', type=str, default='./datasets/crime/', help='root path of the data file')
-    parser.add_argument('--data_path', type=str, default='crime.csv', help='data file')
-    parser.add_argument('--data_topk_path', type=str, default='./datasets/top-k-train/matrix_rank_train_crime1.npy', help='data topk file')
+    parser.add_argument('--data', type=str, default='crime', help='dataset type, [crime, wiki, traffic]')
+    parser.add_argument('--root_path', type=str, default='datasets/Crime-Chicago/', help='root path of the data file')
+    parser.add_argument('--data_path', type=str, default='Crimes-2001_2023.csv', help='data file')
+    parser.add_argument('--data_topk_path', type=str, default='matrix_rank_train_crime.npy', help='data topk file')
   
  
-    parser.add_argument('--output_path', type=str, default='./output/', help='output path')
+    parser.add_argument('--output_path', type=str, default='output/', help='output path')
     parser.add_argument('--features', type=str, default='M',
                         help='forecasting task, options:[M, S, MS]; M:multivariate predict multivariate, S:univariate predict univariate, MS:multivariate predict univariate')
     parser.add_argument('--target', type=str, default='OT', help='target feature in S or MS task')
     parser.add_argument('--freq', type=str, default='m',
                         help='freq for time features encoding, options:[s:secondly, t:minutely, h:hourly, d:daily, b:business days, w:weekly, m:monthly], you can also use more detailed freq like 15min or 3h')
-    parser.add_argument('--checkpoints', type=str, default='./output/checkpoints/', help='location of model checkpoints')
-
+    parser.add_argument('--checkpoints', type=str, default='output/checkpoints/', help='location of model checkpoints')
+    parser.add_argument('--load_model', type=bool, default=False, help='resume model')
+    parser.add_argument('--load_model_path', type=str, default='', help='resume model path')
+    
     # forecasting task
-    parser.add_argument('--k', type=int, default=0, help='number of nearest neighbors')
+    parser.add_argument('--k', type=int, default=13, help='number of nearest neighbors')
     parser.add_argument('--seq_len', type=int, default=24, help='input sequence length')
     parser.add_argument('--label_len', type=int, default=6, help='start token length')
-    parser.add_argument('--pred_len', type=int, default=12, help='prediction sequence length')
+    parser.add_argument('--pred_len', type=int, default=12, help='prediction sequence length [6, 12, 18, 24]')
     parser.add_argument('--seasonal_patterns', type=str, default='Monthly', help='subset for M4')
     parser.add_argument('--seasonality', type=int, default=12, help='seasonality')
     parser.add_argument('--inverse', action='store_true', help='inverse output data', default=False)
@@ -58,7 +60,7 @@ if __name__ == '__main__':
     parser.add_argument('--c_out', type=int, default=-1, help='output size')
     parser.add_argument('--d_model', type=int, default=256, help='dimension of model')
     parser.add_argument('--n_heads', type=int, default=4, help='num of heads')
-    parser.add_argument('--e_layers', type=int, default=1, help='num of encoder layers')
+    parser.add_argument('--e_layers', type=int, default=2, help='num of encoder layers')
     parser.add_argument('--d_layers', type=int, default=1, help='num of decoder layers')
     parser.add_argument('--d_ff', type=int, default=384, help='dimension of fcn')
     parser.add_argument('--moving_avg', type=int, default=25, help='window size of moving average')
@@ -76,7 +78,7 @@ if __name__ == '__main__':
     parser.add_argument('--batch_size', type=int, default=128, help='batch size of train input data')
     parser.add_argument('--patience', type=int, default=3, help='early stopping patience')
     parser.add_argument('--delta', type=int, default=0.0000001, help='early stopping delta')
-    parser.add_argument('--learning_rate', type=float, default=0.0001, help='optimizer learning rate')
+    parser.add_argument('--learning_rate', type=float, default=0.001, help='optimizer learning rate')
     parser.add_argument('--des', type=str, default='test', help='exp description')
     parser.add_argument('--loss', type=str, default='MSE', help='loss function')
     parser.add_argument('--lr_adj', type=str, default='type2', help='adjust learning rate')
@@ -96,7 +98,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
     args.use_gpu = True if torch.cuda.is_available() and args.use_gpu else False
-
+    args.data_topk_path = args.root_path + args.data_topk_path
     if args.use_gpu and args.use_multi_gpu:
         args.devices = args.devices.replace(' ', '')
         device_ids = args.devices.split(',')

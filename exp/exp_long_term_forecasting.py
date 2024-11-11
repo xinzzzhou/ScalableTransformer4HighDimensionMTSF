@@ -96,12 +96,11 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         preds = np.nan_to_num(preds)
         trues = np.nan_to_num(trues)
        
-        mae, mse, rmse, mape, mspe, rse, corr, rmsse, wrmspe, smape, wape, mase = metric(preds, trues, trains, seasonality=self.args.seasonality)
+        rmse, wrmspe, mae, wape = metric(preds, trues, trains, seasonality=self.args.seasonality)
         print(f'vali_results----------')
-        result_print('mse:{}, mae:{}, rse:{}, rmse:{}, mape:{}, mspe:{}, rmsse:{}, wrmspe:{}, smape:{}, wape:{}, mase:{}'.format(mse, mae, rse, rmse, mape, mspe, rmsse, wrmspe, smape, wape, mase))
-        print_with_timestamp('mse:{}, mae:{}, rse:{}, rmse:{}, mape:{}, mspe:{}, rmsse:{}, wrmspe:{}, smape:{}, wape:{}, mase:{}'.format(mse, mae, rse, rmse, mape, mspe, rmsse, wrmspe, smape, wape, mase))
-        print_with_timestamp(result_print('mse:{}, mae:{}, rse:{}, rmse:{}, mape:{}, mspe:{}, rmsse:{}, wrmspe:{}, smape:{}, wape:{}, mase:{}'.format(mse, mae, rse, rmse, mape, mspe, rmsse, wrmspe, smape, wape, mase)))
-        self.args.logger.info(result_print('mse:{}, mae:{}, rse:{}, rmse:{}, mape:{}, mspe:{}, rmsse:{}, wrmspe:{}, smape:{}, wape:{}, mase:{}'.format(mse, mae, rse, rmse, mape, mspe, rmsse, wrmspe, smape, wape, mase)))
+        result_print('rmse:{}, wrmspe:{}, mae:{}, wape:{}'.format(rmse, wrmspe, mae, wape))
+        print_with_timestamp(result_print('rmse:{}, wrmspe:{}, mae:{}, wape:{}'.format(rmse, wrmspe, mae, wape)))
+        self.args.logger.info(result_print('rmse:{}, wrmspe:{}, mae:{}, wape:{}'.format(rmse, wrmspe, mae, wape)))
         
         total_loss = np.average(total_loss)
         self.model.train()
@@ -328,19 +327,20 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         preds = np.nan_to_num(preds)
         trues = np.nan_to_num(trues)
         
-        mae, mse, rmse, mape, mspe, rse, corr, rmsse, wrmspe, smape, wape, mase = metric(preds, trues, trains, seasonality=self.args.seasonality)
-  
+        rmse, wrmspe, mae, wape = metric(preds, trues, trains, seasonality=self.args.seasonality)
         print(f'test_results----------')
-        print_with_timestamp(result_print('mse:{}, mae:{}, rse:{}, rmse:{}, mape:{}, mspe:{}, rmsse:{}, wrmspe:{}, smape:{}, wape:{}, mase:{}'.format(mse, mae, rse, rmse, mape, mspe, rmsse, wrmspe, smape, wape, mase)))
-        self.args.logger.info(result_print('mse:{}, mae:{}, rse:{}, rmse:{}, mape:{}, mspe:{}, rmsse:{}, wrmspe:{}, smape:{}, wape:{}, mase:{}'.format(mse, mae, rse, rmse, mape, mspe, rmsse, wrmspe, smape, wape, mase)))
+        result_print('rmse:{}, wrmspe:{}, mae:{}, wape:{}'.format(rmse, wrmspe, mae, wape))
+        print_with_timestamp(result_print('rmse:{}, wrmspe:{}, mae:{}, wape:{}'.format(rmse, wrmspe, mae, wape)))
+        self.args.logger.info(result_print('rmse:{}, wrmspe:{}, mae:{}, wape:{}'.format(rmse, wrmspe, mae, wape)))
+
         f = open(self.args.output_path+"result_long_term_forecast.txt", 'a')
         f.write(setting + "  \n")
-        f.write('mse:{}, mae:{}, rse:{}, rmse:{}, mape:{}, mspe:{}'.format(mse, mae, rse, rmse, mape, mspe))
+        f.write('rmse:{}, wrmspe:{}, mae:{}, wape:{}'.format(rmse, wrmspe, mae, wape))
         f.write('\n')
         f.write('\n')
         f.close()
 
-        np.save(folder_path + 'metrics.npy', np.array([mae, mse, rmse, mape, mspe]))
+        np.save(folder_path + 'metrics.npy', np.array([rmse, wrmspe, mae, wape]))
         np.save(folder_path + 'pred.npy', preds)
         np.save(folder_path + 'true.npy', trues)
 

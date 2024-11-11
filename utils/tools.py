@@ -18,6 +18,9 @@ def visual_loss(x, ys, labels, path):
     """
     Loss visualization
     """
+    # Create the directory if it doesn't exist
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    
     plt.figure()
     for y, label in zip(ys, labels):
         plt.plot(x, y, label=label, linewidth=2)

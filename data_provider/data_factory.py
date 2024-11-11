@@ -25,7 +25,6 @@ def data_provider(args, flag, logger=None):
         drop_last = True
     batch_size = args.batch_size 
     freq = args.freq
-    print(args.data)
     data_set = Data(
     root_path=args.root_path,
     data_path=args.data_path,
