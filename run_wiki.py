@@ -26,18 +26,18 @@ if __name__ == '__main__':
 
     # data loader
     parser.add_argument('--data', type=str, default='wiki', help='dataset type, [crime, wiki, traffic]')
-    parser.add_argument('--root_path', type=str, default='/home/xinz/ar57_scratch/xinz/HTSFB_project/ScalableTransformer4HighDimensionMTSF/datasets/Wiki-People/', help='root path of the data file')
+    parser.add_argument('--root_path', type=str, default='datasets/Wiki-People/', help='root path of the data file')
     parser.add_argument('--data_path', type=str, default='train_1_people.csv', help='data file')
     parser.add_argument('--data_topk_path', type=str, default='matrix_rank_train_wiki.npy', help='data topk file')
   
  
-    parser.add_argument('--output_path', type=str, default='/home/xinz/ar57_scratch/xinz/HTSFB_project/ScalableTransformer4HighDimensionMTSF/output/', help='output path')
+    parser.add_argument('--output_path', type=str, default='output/', help='output path')
     parser.add_argument('--features', type=str, default='M',
                         help='forecasting task, options:[M, S, MS]; M:multivariate predict multivariate, S:univariate predict univariate, MS:multivariate predict univariate')
     parser.add_argument('--target', type=str, default='OT', help='target feature in S or MS task')
     parser.add_argument('--freq', type=str, default='d',
                         help='freq for time features encoding, options:[s:secondly, t:minutely, h:hourly, d:daily, b:business days, w:weekly, m:monthly], you can also use more detailed freq like 15min or 3h')
-    parser.add_argument('--checkpoints', type=str, default='/home/xinz/ar57_scratch/xinz/HTSFB_project/ScalableTransformer4HighDimensionMTSF/output/checkpoints/', help='location of model checkpoints')
+    parser.add_argument('--checkpoints', type=str, default='output/checkpoints/', help='location of model checkpoints')
     parser.add_argument('--load_model', type=bool, default=False, help='resume model')
     parser.add_argument('--load_model_path', type=str, default='', help='resume model path')
 
