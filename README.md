@@ -35,7 +35,7 @@ cd ScalableTransformer4HighDimensionMTSF
 ```
 conda create --name sthd python=3.9
 conda activate sthd
-pip install -r requirements.txt
+pip install -r requirement.txt
 ```
 3. Download datasets and place them under the corresponding folders of `/dataset`
 4. Train and test the model. We provide two main.py files for demonstration purpose under the root folder. For example, you can train and test Crime-Chicago dataset by:
