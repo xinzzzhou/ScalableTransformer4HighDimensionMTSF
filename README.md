@@ -52,6 +52,8 @@ Config the parameters and run run.py to train and evaluate the model.
 python run_crime.py
 ```
 
+## Tips
+Drop_last will influence the number of data windows in the end. To achieve a fair comparison, we didn't use drop_last for testing. That is a reason why our released result is different from the original paper.
 
 ## Acknowledgement
-Our implementation adapts [Time-Series-Library](https://github.com/thuml/Time-Series-Library) as the code base and have extensively modified it to our purposes. We thank the authors for sharing their implementations and related resources.
+Our implementation adapts [Time-Series-Library](https://github.com/thuml/Time-Series-Library) as the code base and has extensively modified it to our purposes. We thank the authors for sharing their implementations and related resources.
